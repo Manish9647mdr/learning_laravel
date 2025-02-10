@@ -13,17 +13,23 @@ Route::get('/jobs', function () {
     // $jobs = Job::with('employer')->cursorPaginate(10);
     $jobs = Job::with('employer')->simplePaginate(10);
 
-    return view('jobs', ['jobs' => $jobs]);
+    return view('jobs.index', ['jobs' => $jobs]);
 });
 
+Route::get('/jobs/create', function () {
+    return view('jobs.create ');
+});
 
 
 Route::get('/jobs/{id}', function ($id) {
     $job = Job::find($id);
 
-    return view('job', ['job' => $job]);
+    return view('jobs.show', ['job' => $job]);
 });
 
+Route::post('/jobs', function () {
+    dd('hello form the post request');
+});
 
 Route::get('/contact', function () {
     return view('contact');
